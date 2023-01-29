@@ -68,7 +68,13 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 const getUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "get me" });
+  const { name, email, _id } = await userModel.findById(req.user.id);
+  res.status(200);
+  res.json({
+    id: _id,
+    name,
+    email,
+  });
 });
 
 const generateToken = (id) => {
